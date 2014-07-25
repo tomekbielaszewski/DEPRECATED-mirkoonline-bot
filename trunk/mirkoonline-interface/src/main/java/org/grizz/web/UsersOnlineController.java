@@ -39,7 +39,7 @@ public class UsersOnlineController {
 
     @RequestMapping(value = "/jsonp", method = RequestMethod.GET)
     @ResponseBody
-    public String jsonp(@RequestParam("c")String callBack) throws Exception{
+    public String jsonp(@RequestParam("callback")String callBack) throws Exception{
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("counter", userCounter.getCount());
