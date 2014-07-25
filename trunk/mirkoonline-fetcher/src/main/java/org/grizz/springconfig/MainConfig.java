@@ -32,7 +32,9 @@ public class MainConfig {
     @Autowired
     private Provider provider;
     @Autowired
-    private UserActivityFilter filter;
+    private UserActivityFilter oldUserActivitiesFilter;
+    @Autowired
+    private DuplicateFilter duplicateFilter;
     @Autowired
     private HTTPRequestService requestService;
     @Autowired
@@ -52,7 +54,9 @@ public class MainConfig {
     }
 
     private List<UserActivity> extractUserActivity(List<UserActivity> users, int minutes) {
-        return filter.filterOutAllOlderThan(DateTime.now().minusMinutes(minutes), users);
+        List<UserActivity> onlyNewActivities = oldUserActivitiesFilter.filterOutAllOlderThan(DateTime.now().minusMinutes(minutes), users);
+        List<UserActivity> uniqueActivities = duplicateFilter.filter(onlyNewActivities);
+        return uniqueActivities;
     }
 
     private void setExternalCounter(int userCount) {
