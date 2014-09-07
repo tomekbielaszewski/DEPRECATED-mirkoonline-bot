@@ -42,10 +42,11 @@ public class MainConfig {
 
     @Scheduled(fixedDelay = 15 * 60 * 1000) //min, sec, ms
     public void run() {
-        List<UserActivity> activeUsers = fetchData(); //Pobiera dane z 50 stron mirko i 10 stron goracych. Czy jakos tak - do sprawdzenia
+        List<UserActivity> activeUsers = fetchData(); //Pobiera dane z ostatnich 99 stron mirko
         List<UserActivity> lastlyActiveUsers = extractUserActivity(activeUsers, _30minutes); //ekstraktuje aktywnosc uzytkownikow i filtruje ich aby zostali tylko Ci ktorzy byli aktywni przez ostatnie 30 min
         setExternalCounter(lastlyActiveUsers.size()); //ustawia licznik na heroku
 
+        log.info("Switching application key!");
         keyProvider.switchKey();
     }
 

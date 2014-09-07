@@ -17,9 +17,9 @@ public class KeyProvider {
 
     private static LinkedList<Key> keys = new LinkedList<Key>();
     static {
-        keys.add(new Key("Ot3JeTTYbL","ub5KD2PEl8"));
         keys.add(new Key("BaYW8xM5Dw","avBr72akl2"));
         keys.add(new Key("uaWqdwozqz","75GbuKjMZc"));
+        keys.add(new Key("Ot3JeTTYbL","ub5KD2PEl8"));
     }
 
 
@@ -28,8 +28,6 @@ public class KeyProvider {
     }
 
     public void switchKey() {
-        log.info("Switching application key!");
-
         Key first = keys.removeFirst();
         keys.addLast(first);
     }

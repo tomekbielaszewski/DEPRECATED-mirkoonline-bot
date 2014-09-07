@@ -1,6 +1,7 @@
 package org.grizz.service;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import org.grizz.model.UserActivity;
 import org.grizz.util.UserActivitiesUtil;
 import org.slf4j.Logger;
@@ -30,10 +31,18 @@ public class UserActivityProvider implements Provider {
     public List<UserActivity> provide() {
         List<UserActivity> activities = new ArrayList<UserActivity>();
         Gson gson = new Gson();
-        log.info("Getting last 90 pages of mikroblog...");
-        for (int i = 1; i <= 90; i++) {
+        log.info("Getting last 99 pages of mikroblog...");
+        for (int i = 1; i <= 99; i++) {
             String json = requestService.sendGet(getStreamIndexUrl(i));
-            UserActivity[] activitiesFromJSON = gson.fromJson(json, UserActivity[].class);
+            UserActivity[] activitiesFromJSON = null;
+            try {
+                activitiesFromJSON = gson.fromJson(json, UserActivity[].class);
+            } catch (JsonSyntaxException e) {
+                System.out.print("[API key is exhausted - switching...]");
+                i--;
+                keyProvider.switchKey();
+                continue;
+            }
             Collections.addAll(activities, activitiesFromJSON);
 
             System.out.print(i + "|");
