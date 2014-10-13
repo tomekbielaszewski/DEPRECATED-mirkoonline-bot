@@ -24,12 +24,10 @@ public class UserCounter {
     }
 
     public void setCount(int count) {
-        if(this.updated != null) {
-            history.put(this.updated.getTime(), this.count);
-        }
-
         this.count = count;
         this.updated = new Date();
+
+        history.put(this.updated.getTime(), this.count);
     }
 
     public Map<Long, Integer> getHistory() {
