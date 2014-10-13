@@ -64,8 +64,6 @@ public class UsersOnlineController {
     @ResponseBody
     public String history(@RequestParam("callback")String callBack) throws Exception{
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("history", userCounter.getHistory());
         return objectMapper.writeValueAsString(new JSONPObject(callBack, userCounter.getHistory()));
     }
 }
