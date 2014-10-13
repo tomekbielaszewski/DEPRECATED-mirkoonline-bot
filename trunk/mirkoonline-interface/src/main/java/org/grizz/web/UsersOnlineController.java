@@ -2,6 +2,8 @@ package org.grizz.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.grizz.model.UserCounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -64,6 +67,17 @@ public class UsersOnlineController {
     @ResponseBody
     public String history(@RequestParam("callback")String callBack) throws Exception{
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(new JSONPObject(callBack, userCounter.getHistory()));
+        Map<Long, Integer> history = userCounter.getHistory();
+        List<Map<String, Object>> jsonHistory = Lists.newArrayList();
+
+        for (Map.Entry<Long, Integer> historyEntry : history.entrySet()) {
+            Map<String, Object> jsonHistoryEntry = Maps.newHashMap();
+            jsonHistoryEntry.put("date", historyEntry.getKey());
+            jsonHistoryEntry.put("value", historyEntry.getValue());
+
+            jsonHistory.add(jsonHistoryEntry);
+        }
+
+        return objectMapper.writeValueAsString(new JSONPObject(callBack, jsonHistory));
     }
 }
