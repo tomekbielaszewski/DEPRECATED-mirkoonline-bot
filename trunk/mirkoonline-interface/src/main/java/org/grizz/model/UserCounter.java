@@ -34,7 +34,7 @@ public class UserCounter {
     }
 
     private void optimizeHistory() {
-        while(history.size() > 140) { //okolo 24-36 godzin
+        while(history.size() > 250) { //okolo 24-36 godzin
             history.remove(history.firstKey());
         }
     }
