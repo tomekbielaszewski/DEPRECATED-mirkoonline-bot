@@ -40,7 +40,7 @@ public class MainConfig {
     @Autowired
     private KeyProvider keyProvider;
 
-    @Scheduled(fixedDelay = 15 * 60 * 1000) //min, sec, ms
+    @Scheduled(fixedDelay = 8 * 60 * 1000) //min, sec, ms
     public void run() {
         List<UserActivity> activeUsers = fetchData(); //Pobiera dane z ostatnich 99 stron mirko
         List<UserActivity> lastlyActiveUsers = extractUserActivity(activeUsers, _30minutes); //ekstraktuje aktywnosc uzytkownikow i filtruje ich aby zostali tylko Ci ktorzy byli aktywni przez ostatnie 30 min

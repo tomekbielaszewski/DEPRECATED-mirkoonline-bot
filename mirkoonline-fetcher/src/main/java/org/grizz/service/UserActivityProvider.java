@@ -52,10 +52,7 @@ public class UserActivityProvider implements Provider {
                 continue;
             }
             Collections.addAll(activities, activitiesFromJSON);
-
-            System.out.print(i + "|");
         }
-        System.out.println();
         log.info("Collected "+activities.size()+" entries!");
         return activities;
     }
