@@ -26,7 +26,7 @@ import static org.grizz.service.KeyProvider.Key;
 @ComponentScan("org.grizz")
 public class MainConfig {
     private final int _30minutes = 30;
-    private final String SET_COUNTER_URL = "http://mirkoonline.herokuapp.com/setNewCounter/";
+    private final String SET_COUNTER_URL = "http://178.62.127.171:8080/setNewCounter/";
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -44,7 +44,7 @@ public class MainConfig {
     public void run() {
         List<UserActivity> activeUsers = fetchData(); //Pobiera dane z ostatnich 99 stron mirko
         List<UserActivity> lastlyActiveUsers = extractUserActivity(activeUsers, _30minutes); //ekstraktuje aktywnosc uzytkownikow i filtruje ich aby zostali tylko Ci ktorzy byli aktywni przez ostatnie 30 min
-        setExternalCounter(lastlyActiveUsers.size()); //ustawia licznik na heroku
+        setExternalCounter(lastlyActiveUsers.size()); //ustawia licznik w aplikacji webowej
 
         log.info("Switching application key!");
         keyProvider.switchKey();

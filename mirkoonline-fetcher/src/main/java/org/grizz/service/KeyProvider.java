@@ -17,9 +17,12 @@ public class KeyProvider {
 
     private static LinkedList<Key> keys = new LinkedList<Key>();
     static {
+        keys.add(new Key("qhGVSJyb4J","xnJ8JC6ABy"));
         keys.add(new Key("BaYW8xM5Dw","avBr72akl2"));
         keys.add(new Key("uaWqdwozqz","75GbuKjMZc"));
         keys.add(new Key("Ot3JeTTYbL","ub5KD2PEl8"));
+        keys.add(new Key("mpUtnPXzkW","zGP3gJ0AlP"));
+        keys.add(new Key("DWNuYSiFbO","4XgwxuiEhW"));
     }
 
 
